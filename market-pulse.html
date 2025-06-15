@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MarketProEdge - Market Pulse</title>
-  <meta name="description" content="Explore volume profile insights with real-time POC data.">
-  <meta name="keywords" content="volume profile, point of control, market pulse, trading">
+  <meta name="description" content="Explore volume profile insights with POC, VAH, and VAL data.">
+  <meta name="keywords" content="volume profile, point of control, value area, trading">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -24,7 +24,7 @@
   <main data-aos="fade-up">
     <h2>Market Pulse: Volume Profile Insights</h2>
     <div id="premiumTeaser" class="premium-teaser">
-      <p>Free users see POC for AAPL. Subscribe for full access to 10+ stocks!</p>
+      <p>Free users see AAPL data. Subscribe for POC, VAH, and VAL on 5+ stocks!</p>
       <a href="pricing.html" class="cta-button">Subscribe Now ($9.99/month)</a>
     </div>
     <div id="tickerContainer" class="ticker-grid"></div>
@@ -46,20 +46,23 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true });
-    fetch('poc_data.json')
+    fetch('marketproedge_signals.json')
       .then(response => response.json())
       .then(data => {
         const container = document.getElementById('tickerContainer');
-        const aaplData = data.find(item => item.symbol === 'AAPL');
+        const aaplData = data['AAPL'];
         if (aaplData) {
           const box = document.createElement('div');
           box.className = 'ticker-box';
           box.innerHTML = `
-            <h3>${aaplData.symbol}</h3>
-            <p>Point of Control: $${aaplData.pocLevel}</p>
-            <p>Volume: ${aaplData.volume.toLocaleString()}</p>
-            <p>Date: ${aaplData.date}</p>
-            <button class="chart-button" data-symbol="${aaplData.symbol}" data-poc="${aaplData.pocLevel}">View Chart</button>
+            <h3>AAPL</h3>
+            <p>POC (1h): $${aaplData['POC_1h']}</p>
+            <p>VAH (1h): $${aaplData['VAH_1h']}</p>
+            <p>VAL (1h): $${aaplData['VAL_1h']}</p>
+            <p>POC (1day): $${aaplData['POC_1day']}</p>
+            <p>VAH (1day): $${aaplData['VAH_1day']}</p>
+            <p>VAL (1day): $${aaplData['VAL_1day']}</p>
+            <button class="chart-button" data-symbol="AAPL" data-poc="${aaplData['POC_1day']}" data-vah="${aaplData['VAH_1day']}" data-val="${aaplData['VAL_1day']}">View Chart</button>
             <p><a href="https://tradingview.com/?aff_id=xxx">Analyze on TradingView</a></p>
           `;
           container.appendChild(box);
@@ -71,15 +74,17 @@
           button.addEventListener('click', () => {
             const symbol = button.getAttribute('data-symbol');
             const poc = parseFloat(button.getAttribute('data-poc'));
+            const vah = parseFloat(button.getAttribute('data-vah'));
+            const val = parseFloat(button.getAttribute('data-val'));
             modal.classList.add('show');
             const ctx = document.getElementById('myChart').getContext('2d');
             new Chart(ctx, {
               type: 'bar',
               data: {
-                labels: ['POC', 'High', 'Low'],
+                labels: ['POC', 'VAH', 'VAL'],
                 datasets: [{
-                  label: `${symbol} Volume Profile`,
-                  data: [poc, poc + 10, poc - 10],
+                  label: `${symbol} Volume Profile (1day)`,
+                  data: [poc, vah, val],
                   backgroundColor: ['#e67e22', '#333', '#333']
                 }]
               },
