@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarketProEdge - Uncover Market Insights</title>
+  <!-- SEO Metadata -->
+  <meta name="description" content="MarketProEdge: Finance and news insights with volume profile data and expert analysis.">
+  <meta name="keywords" content="volume profile, point of control, trading, finance news, market analysis">
+  <!-- AOS CSS for scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px 10%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 15px;
+      font-size: 1em;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #ddd;
+    }
+
+    /* Hero Section */
+    #hero {
+      background: url('https://source.unsplash.com/1600x900/?stock,market') no-repeat center/cover;
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+      color: #fff;
+    }
+    #hero h1 {
+      font-size: 2.8em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    }
+    #hero p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    }
+    .cta-button {
+      background-color: #e67e22;
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 4px;
+      font-size: 1.1em;
+      text-decoration: none;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+    .cta-button:hover {
+      transform: translateY(-3px);
+      background-color: #cf711f;
+    }
+
+    /* Key Features Section */
+    #features {
+      padding: 50px 20px;
+      background-color: #fff;
+      text-align: center;
+    }
+    #features h2 {
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+    .features-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .feature-card {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 30px;
+      width: 280px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .feature-card h3 {
+      margin-bottom: 15px;
+      font-size: 1.5em;
+    }
+    .feature-card p {
+      font-size: 0.95em;
+      margin-bottom: 10px;
+    }
+    .feature-card a {
+      color: #e67e22;
+      text-decoration: none;
+    }
+    .feature-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* Market Pulse Preview Section */
+    #market-pulse-preview {
+      padding: 50px 20px;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+    #market-pulse-preview h2 {
+      margin-bottom: 30px;
+      font-size: 2em;
+    }
+    .preview-text {
+      max-width: 800px;
+      margin: 0 auto 20px auto;
+      font-size: 1.1em;
+    }
+    .preview-link {
+      background-color: #e67e22;
+      color: #fff;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: background-color 0.2s ease;
+    }
+    .preview-link:hover {
+      background-color: #cf711f;
+    }
+
+    /* Blog Teaser Section */
+    #blog-teaser {
+      padding: 50px 20px;
+      background-color: #fff;
+      text-align: center;
+    }
+    #blog-teaser h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    #blog-teaser p {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* News Section */
+    #news {
+      padding: 50px 20px;
+      background-color: #fff;
+    }
+    #news h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2em;
+    }
+    .news-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .news-widget, .twitter-widget {
+      background-color: #fafafa;
+      border: 1px solid #ddd;
+      padding: 20px;
+      width: 500px;
+      border-radius: 6px;
+    }
+
+    /* Newsletter Section */
+    #newsletter {
+      padding: 50px 20px;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+    #newsletter h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    #newsletter form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    #newsletter input[type="email"] {
+      padding: 10px;
+      width: 70%;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    #newsletter input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #e67e22;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    #newsletter input[type="submit"]:hover {
+      background-color: #cf711f;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    footer a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    footer p {
+      margin: 5px 0;
+      font-size: 0.9em;
+    }
+
+    /* Ad Placeholder */
+    .ad-placeholder {
+      background-color: #eee;
+      padding: 20px;
+      text-align: center;
+      margin: 20px auto;
+      max-width: 728px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header data-aos="fade-down">
+    <div class="logo">📊 MarketProEdge</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="market-pulse.html">Market Pulse</a>
+      <a href="news.html">News</a>
+      <a href="blog.html">Blog</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" data-aos="fade-up">
+    <h1>MarketProEdge: Empower Your Market Decisions</h1>
+    <p>Access expert insights, dynamic analysis tools, and curated stock market news—all on one platform.</p>
+    <a href="pricing.html" class="cta-button">Get Started</a>
+  </section>
+
+  <!-- Ad Placeholder (for AdSense) -->
+  <div class="ad-placeholder" data-aos="fade-up">
+    <p>Advertisement</p>
+    <!-- Replace with AdSense code after approval -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxx" crossorigin="anonymous"></script> -->
+  </div>
+
+  <!-- Key Features Section -->
+  <section id="features" data-aos="fade-up">
+    <h2>Key Features</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>Interactive Charts</h3>
+        <p>Explore dynamic charts that bring real-time market data to life with impactful animations.</p>
+        <p><a href="https://tradingview.com/?aff_id=xxx">Analyze with TradingView</a></p>
+      </div>
+      <div class="feature-card">
+        <h3>Data-Driven Insights</h3>
+        <p>Access high-quality indicators—from volume profiles to RSI & moving averages—that drive informed decisions.</p>
+        <p><a href="market-pulse.html">View POC Data</a></p>
+      </div>
+      <div class="feature-card">
+        <h3>Curated Market News</h3>
+        <p>Stay in the loop with the latest USA stock market news from top sources and expert broadcasters.</p>
+        <p><a href="news.html">Read News</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Market Pulse Preview Section -->
+  <section id="market-pulse-preview" data-aos="fade-up">
+    <h2>Market Pulse Preview</h2>
+    <p class="preview-text">
+      Get a sneak peek at our in-depth market data analysis from our exclusive Market Pulse feature.
+      Discover detailed insights and interactive charts that help you pinpoint market trends.
+    </p>
+    <a href="market-pulse.html" class="preview-link">View Full Market Pulse</a>
+  </section>
+
+  <!-- Blog Teaser Section -->
+  <section id="blog-teaser" data-aos="fade-up">
+    <h2>Latest Insights</h2>
+    <p>Explore our blog for volume profile tutorials, market analysis, and trading tips.</p>
+    <a href="blog.html" class="cta-button">Read More</a>
+  </section>
+
+  <!-- News Section -->
+  <section id="news" data-aos="fade-up">
+    <h2>USA Stock Market News</h2>
+    <div class="news-container">
+      <!-- TradingView News Widget -->
+      <div class="news-widget">
+        <div class="tradingview-widget-container">
+          <div id="tradingview_news_widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-news.js" async>
+          {
+            "feedMode": "market",
+            "title": "Market News",
+            "locale": "en",
+            "symbols": [
+              {"s": "NASDAQ:AAPL", "d": "Apple"},
+              {"s": "NASDAQ:MSFT", "d": "Microsoft"}
+            ],
+            "colorTheme": "light",
+            "isTransparent": false,
+            "width": "100%",
+            "height": "400"
+          }
+          </script>
+        </div>
+      </div>
+      <!-- Twitter Timeline Widget -->
+      <div class="twitter-widget">
+        <a class="twitter-timeline" href="https://twitter.com/WalterBloomberg?ref_src=twsrc%5Etfw">Tweets by WalterBloomberg</a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section id="newsletter" data-aos="fade-up">
+    <h2>Join Our Newsletter</h2>
+    <p>Stay updated with market insights and exclusive offers.</p>
+    <!-- Mailchimp Form (replace with your form code) -->
+    <form action="https://your-mailchimp-url" method="post" target="_blank">
+      <input type="email" name="EMAIL" placeholder="Enter your email" required>
+      <input type="submit" value="Subscribe">
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 MarketProEdge | <a href="privacy.html">Privacy Policy</a> | <a href="about.html">Our Methodology</a></p>
+    <p>Disclaimer: Content is for informational purposes only, not investment advice. Consult a financial advisor. We earn commissions from affiliate links.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS for scroll animations
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  </script>
+</body>
+</html>
