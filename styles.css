@@ -1,0 +1,368 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Header */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 15px;
+  font-size: 1em;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ddd;
+}
+
+/* Hero Section */
+#hero {
+  background: url('https://source.unsplash.com/1600x900/?stock,market') no-repeat center/cover;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+  color: #fff;
+}
+
+#hero h1 {
+  font-size: 2.8em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+#hero p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+.cta-button {
+  background-color: #e67e22;
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1em;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  background-color: #cf711f;
+}
+
+/* Features Section */
+#features {
+  padding: 50px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+#features h2 {
+  font-size: 2em;
+  margin-bottom: 30px;
+}
+
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.feature-card {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 30px;
+  width: 280px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.feature-card h3 {
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.feature-card p {
+  font-size: 0.95em;
+  margin-bottom: 10px;
+}
+
+.feature-card a {
+  color: #e67e22;
+  text-decoration: none;
+}
+
+.feature-card a:hover {
+  text-decoration: underline;
+}
+
+/* Market Pulse Preview Section */
+#market-pulse-preview {
+  padding: 50px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+#market-pulse-preview h2 {
+  margin-bottom: 30px;
+  font-size: 2em;
+}
+
+.preview-text {
+  max-width: 800px;
+  margin: 0 auto 20px auto;
+  font-size: 1.1em;
+}
+
+.preview-link {
+  background-color: #e67e22;
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 1.1em;
+  transition: background-color 0.2s ease;
+}
+
+.preview-link:hover {
+  background-color: #cf711f;
+}
+
+/* Blog Teaser Section */
+#blog-teaser {
+  padding: 50px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+#blog-teaser h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+#blog-teaser p {
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* News Section */
+#news {
+  padding: 50px 20px;
+  background-color: #fff;
+}
+
+#news h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2em;
+}
+
+.news-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.news-widget, .twitter-widget {
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  padding: 20px;
+  width: 500px;
+  border-radius: 6px;
+}
+
+/* Newsletter Section */
+#newsletter {
+  padding: 50px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+#newsletter h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+#newsletter form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#newsletter input[type="email"] {
+  padding: 10px;
+  width: 70%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+#newsletter input[type="submit"] {
+  padding: 10px 20px;
+  background-color: #e67e22;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+#newsletter input[type="submit"]:hover {
+  background-color: #cf711f;
+}
+
+/* Ticker Grid (Market Pulse) */
+.ticker-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.ticker-box {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 20px;
+  width: 280px;
+  transition: transform 0.2s;
+}
+
+.ticker-box:hover {
+  transform: translateY(-5px);
+}
+
+.ticker-box h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.chart-button {
+  background-color: #e67e22;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.chart-button:hover {
+  background-color: #cf711f;
+}
+
+/* Premium Teaser */
+.premium-teaser {
+  background: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+/* Modal (Chart) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal.show {
+  display: block;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 8% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 800px;
+  border-radius: 8px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+/* Ad Placeholder */
+.ad-placeholder {
+  background-color: #eee;
+  padding: 20px;
+  text-align: center;
+  margin: 20px auto;
+  max-width: 728px;
+  border-radius: 4px;
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer p {
+  margin
