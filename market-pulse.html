@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarketProEdge - Market Pulse</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333; }
+    header { background-color: #333; color: #fff; padding: 20px 10%; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5em; font-weight: bold; }
+    nav a { color: #fff; text-decoration: none; margin-left: 15px; font-size: 1em; }
+    nav a:hover { color: #ddd; }
+    main { padding: 50px 20px; text-align: center; }
+    h2 { font-size: 2em; margin-bottom: 30px; }
+    .ticker-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+    .ticker-box { background: #fafafa; border: 1px solid #ddd; border-radius: 6px; padding: 20px; width: 280px; transition: transform 0.2s; }
+    .ticker-box:hover { transform: translateY(-5px); }
+    .ticker-box h3 { font-size: 1.5em; margin-bottom: 10px; }
+    .chart-button { background-color: #e67e22; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+    .chart-button:hover { background-color: #cf711f; }
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); }
+    .modal.show { display: block; }
+    .modal-content { background-color: #fefefe; margin: 8% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 800px; border-radius: 8px; }
+    .close { color: #aaa; float: right; font-size: 28px; cursor: pointer; }
+    .close:hover { color: #000; }
+    .premium-teaser { background: #fff; padding: 20px; border-radius: 6px; max-width: 600px; margin: 20px auto; }
+    .cta { background-color: #e67e22; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; text-decoration: none; }
+    .cta:hover { background-color: #cf711f; }
+    footer { background-color: #333; color: #fff; text-align: center; padding: 20px; }
+  </style>
+</head>
+<body>
+  <header data-aos="fade-down">
+    <div class="logo">📊 MarketProEdge</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="market-pulse.html">Market Pulse</a>
+      <a href="news.html">News</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+  <main data-aos="fade-up">
+    <h2>Market Pulse: Volume Profile Insights</h2>
+    <div id="premiumTeaser" class="premium-teaser">
+      <p>Free users see POC for AAPL. Subscribe for full access to 10+ stocks!</p>
+      <a href="pricing.html" class="cta">Subscribe Now ($9.99/month)</a>
+    </div>
+    <div id="tickerContainer" class="ticker-grid"></div>
+  </main>
+  <div id="chartModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <canvas id="myChart" width="600" height="400"></canvas>
+    </div>
+  </div>
+  <footer>
+    <p>© 2025 MarketProEdge | <a style="color: inherit;" href="privacy.html">Privacy Policy</a></p>
+    <p>Disclaimer: Content is for informational purposes only, not investment advice. Consult a financial advisor. We earn commissions from affiliate links.</p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+    fetch('poc_data.json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('tickerContainer');
+        // Show only AAPL for free users
+        const aaplData = data.find(item => item.symbol === 'AAPL');
+        if (aaplData) {
+          const box = document.createElement('div');
+          box.className = 'ticker-box';
+          box.innerHTML = `
+            <h3>${aaplData.symbol}</h3>
+            <p>Point of Control: $${aaplData.pocLevel}</p>
+            <p>Volume: ${aaplData.volume.toLocaleString()}</p>
+            <p>Date: ${aaplData.date}</p>
+            <button class="chart-button" data-symbol="${aaplData.symbol}" data-poc="${aaplData.pocLevel}">View Chart</button>
+            <p><a href="https://tradingview.com/?aff_id=xxx">Analyze on TradingView</a></p>
+          `;
+          container.appendChild(box);
+        }
+        // Chart modal logic
+        const modal = document.getElementById('chartModal');
+        const closeBtn = document.querySelector('.close');
+        const chartButtons = document.querySelectorAll('.chart-button');
+        chartButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const symbol = button.getAttribute('data-symbol');
+            const poc = parseFloat(button.getAttribute('data-poc'));
+            modal.classList.add('show');
+            const ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: ['POC', 'High', 'Low'],
+                datasets: [{
+                  label: `${symbol} Volume Profile`,
+                  data: [poc, poc + 10, poc - 10], // Mock high/low
+                  backgroundColor: ['#e67e22', '#333', '#333']
+                }]
+              },
+              options: { scales: { y: { beginAtZero: true } } }
+            });
+          });
+        });
+        closeBtn.addEventListener('click', () => modal.classList.remove('show'));
+      });
+  </script>
+</body>
+</html>
